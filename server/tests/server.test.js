@@ -41,7 +41,7 @@ describe('POST /todos',()=>{
                  done()
              }).catch((e)=>done(e))
          })
-     })
+     }).timeout(100000);
 
      it('should return 400',(done)=>{
           request(app)
@@ -55,7 +55,7 @@ describe('POST /todos',()=>{
                   done()
               }).catch((e)=>done(e))
           })
-     })
+     }).timeout(100000);
 })
 
 
@@ -72,7 +72,7 @@ describe('GET /todos',()=>{
               }).catch((e)=>done(e));
               
         })
-    })
+    }).timeout(100000)
 })
 
 
@@ -89,7 +89,7 @@ describe('GET /todos/:id',()=>{
                  expect(docs[0].text).toBe(todo[0].text);
                  done();
              }).catch((e)=>done(e));
-         })
+         }).timeout(100000)
      })
 
      it('should return bad request 404',(done)=>{
@@ -105,7 +105,7 @@ describe('GET /todos/:id',()=>{
                    done();
                }).catch((e)=>done(e))
          })
-     })
+     }).timeout(100000)
 
 
      it('should return 400 for non-object ids', (done) => {
@@ -114,7 +114,7 @@ describe('GET /todos/:id',()=>{
           .get(`/todos/${hexId}`)
           .expect(404)
           .end(done)
-      })
+      }).timeout(100000)
 
 })
 
@@ -130,7 +130,7 @@ describe('DELETE /todos/:id',()=>{
              expect(res.body._id).toBe(hexId);
         })
         .end(done)
-    })
+    }).timeout(100000)
     
     it('should return 404 for id not found',(done)=>{
         var hexId=new ObjectID();
@@ -145,7 +145,7 @@ describe('DELETE /todos/:id',()=>{
             })
         })
 
-    })
+    }).timeout(100000)
 
     it('should return 404 for not valid Id',(done)=>{
         var id='nhhssjnag'
@@ -153,6 +153,6 @@ describe('DELETE /todos/:id',()=>{
         .delete(`/todo/${id}`)
         .expect(404)
         .end(done)
-    })
+    }).timeout(100000)
 
 })
